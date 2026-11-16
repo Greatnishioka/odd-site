@@ -1,0 +1,132 @@
+/* サイト全体の CSS。scripts/build-assets.mjs で圧縮し、HTML に埋め込む */
+:root {
+	--fg: #1d1b18;
+	--muted: #6b665e;
+	--bg: #faf8f4;
+	--card: #fff;
+	--line: #e4dfd6;
+	--accent: #b4441c;
+}
+
+/* ページを移るときに白く光らないよう、前後のページをつなぐ */
+@view-transition {
+	navigation: auto;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	font-family: system-ui, -apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+	color: var(--fg);
+	background: var(--bg);
+	line-height: 1.8;
+}
+
+a {
+	color: var(--accent);
+}
+
+.wrap {
+	max-width: 760px;
+	margin: 0 auto;
+	padding: 0 16px;
+}
+
+.hd {
+	border-bottom: 1px solid var(--line);
+	background: var(--card);
+}
+
+.hd .wrap {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	flex-wrap: wrap;
+	padding-block: 10px;
+}
+
+.logo {
+	font-weight: 800;
+	text-decoration: none;
+	color: var(--fg);
+}
+
+h1 {
+	font-size: 26px;
+	line-height: 1.4;
+	margin: 16px 0 8px;
+}
+
+.meta {
+	font-size: 13px;
+	color: var(--muted);
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.finder {
+	background: var(--card);
+	border: 1px solid var(--line);
+	border-radius: 8px;
+	padding: 10px 14px;
+	font-size: 14px;
+}
+
+.body h2 {
+	font-size: 20px;
+	margin-top: 2em;
+}
+
+.cards {
+	display: grid;
+	gap: 12px;
+	list-style: none;
+	padding: 0;
+}
+
+.cards li {
+	background: var(--card);
+	border: 1px solid var(--line);
+	border-radius: 8px;
+	padding: 12px;
+}
+
+.cards a {
+	text-decoration: none;
+	color: var(--fg);
+	font-weight: 700;
+}
+
+.cards p {
+	font-size: 13px;
+	color: var(--muted);
+	margin: 4px 0 0;
+}
+
+/* 広告枠。高さは枠ごとに style で先に確保する（広告が入ったときに本文がずれないように） */
+.ad {
+	margin: 32px 0;
+}
+
+.ad-label {
+	font-size: 11px;
+	color: var(--muted);
+	margin: 0 0 4px;
+}
+
+/* 配信できる広告がなかった枠は閉じる（本文より後ろにあるので、閉じてもずれは目に入らない） */
+.ad:has(ins[data-ad-status='unfilled']) {
+	display: none;
+}
+
+.ft {
+	margin-top: 48px;
+	padding: 24px 0;
+	border-top: 1px solid var(--line);
+	font-size: 12px;
+	color: var(--muted);
+}

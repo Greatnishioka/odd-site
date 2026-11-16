@@ -1,0 +1,6 @@
+node_modules/
+.wrangler/
+dist/
+.dev.vars
+# scripts/build-assets.mjs が作る（CSS とブラウザ用の JS を圧縮したもの）
+src/generated/

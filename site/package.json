@@ -1,0 +1,20 @@
+{
+	"name": "odd-site",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "wrangler dev",
+		"build": "node scripts/build-assets.mjs",
+		"check": "node scripts/build-assets.mjs && tsc --noEmit && tsc --noEmit -p src/client",
+		"deploy": "wrangler deploy",
+		"types": "wrangler types --strict-vars=false"
+	},
+	"dependencies": {
+		"hono": "4.13.19"
+	},
+	"devDependencies": {
+		"esbuild": "0.28.2",
+		"typescript": "7.0.2",
+		"wrangler": "4.163.0"
+	}
+}

@@ -1,0 +1,27 @@
+{
+	// Cloudflare Workers の設定。ページは表示のたびに Worker で作り（SSR）、Workers Cache に持たせる
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "odd-site",
+	"main": "./src/index.tsx",
+	"compatibility_date": "2026-11-01",
+	"minify": true,
+	// 本番のドメインが決まるまでは、どこにも公開しない（routes を足すときに、workers_dev も見直す）
+	"workers_dev": false,
+	// CSS とブラウザ用の JS は、圧縮したものを文字列として読み込み、HTML に埋め込む
+	"rules": [{ "type": "Text", "globs": ["**/generated/*.css", "**/generated/*.js"], "fallthrough": true }],
+	// wrangler dev と deploy の前に、CSS とブラウザ用の JS を作る。src/client と src/styles が変わったら作り直す
+	"build": {
+		"command": "node scripts/build-assets.mjs",
+		"watch_dir": ["src/client", "src/styles"],
+	},
+	// Worker の手前のキャッシュ。デプロイすると古いキャッシュは使われなくなる（cross_version_cache は指定しない）
+	"cache": {
+		"enabled": true,
+	},
+	"vars": {
+		// 広告。運営責任者が配信事業者と開始時期を決めるまでは false にしておく（仕様書 8 章）
+		"ADS_ENABLED": "false",
+		// AdSense の発行者 ID（ca-pub-…）。広告を始めるときに入れる
+		"ADS_CLIENT": "",
+	},
+}
